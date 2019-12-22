@@ -1,5 +1,20 @@
 <%- @users.each do |user| %>
 <h2><%=user.login %></h2>
+
+  <%= form_with(url: "/api/media/search_remote/", method: "get") do %>
+    <%= label_tag(:q, "Search for:") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
+  <% end %>
 <% end %>
+<%  %>
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src= <%= @res['posterUrl'] %>><!--alt="Card image cap"-->
+  <div class="card-body">
+    <h5 class="card-title"><%= @res['nameRu'] %></h5>
+    <p class="card-text"><%= @res['description'] %></p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 <%= link_to 'Go google', 'https://google.com' %>
 <%=@res %>

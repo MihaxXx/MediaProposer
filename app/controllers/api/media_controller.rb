@@ -10,4 +10,8 @@ class Api::MediaController < ApplicationController
   def search
     render json: Media.find { |m| m.name == params['name'] }
   end
+
+  def search_remote
+    render json: Media.find_remote(name)
+  end
 end
