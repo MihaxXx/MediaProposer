@@ -15,6 +15,8 @@ ActiveAdmin.register User do
     f.inputs do
       f.input :login
       f.inputs :email
+      f.input :password
+      f.input :password_confirmation
     end
     f.actions
   end
