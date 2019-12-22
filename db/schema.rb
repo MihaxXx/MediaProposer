@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_22_132625) do
+ActiveRecord::Schema.define(version: 2019_12_22_190849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_12_22_132625) do
     t.string "type", null: false
     t.date "release"
     t.bigint "image_id"
+    t.bigint "foreign_id"
     t.index ["image_id"], name: "index_media_on_image_id"
   end
 
