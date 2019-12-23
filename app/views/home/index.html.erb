@@ -1,16 +1,29 @@
-<%= form_tag("/", method: :get) do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:search) %>
-  <%= submit_tag("Search") %>
-<% end %>
-
-<%- @res.each do |m| %>
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" alt="Card image cap" src=<%= m.poster_url %>>
-    <div class="card-body">
-      <h5 class="card-title"><%= m.name %></h5>
-      <p class="card-text"><%= m.desc %></p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
+<div class="row d-flex justify-content-center">
+  <div class="col-xl-10 col-sm-12">
+    <%= form_tag("/", method: :get) do %>
+      <%= label_tag(:q, "Search for:") %>
+      <%= text_field_tag(:search) %>
+      <%= submit_tag("Search") %>
+    <% end %>
   </div>
-<% end %>
+</div>
+<div class="row d-flex justify-content-center">
+  <%- @res.each do |m| %>
+    <div class="col-xl-10 col-sm-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-3">
+            <img class="card-img-top" alt="Card image cap" src=<%= m.poster_url %>>
+          </div>
+          <div class="col-9">
+            <div class="card-body">
+              <h5 class="card-title"><%= m.name %></h5>
+              <p class="card-text"><%= m.desc %></p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
