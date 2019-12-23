@@ -4,7 +4,7 @@ class CreatesMediaImageReview < ActiveRecord::Migration[6.0]
       t.string :name, null: false
       t.string :origin_name, null: false
       t.text :desc
-      t.decimal :rating, precision: 3, scale: 3
+      t.decimal :rating, precision: 18, scale: 3
       t.string :type, null: false
       t.date :release
       t.belongs_to :image

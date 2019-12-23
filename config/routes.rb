@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'home#index'
   namespace :api do
     get 'media', to: 'media#index'
+    post 'media', to: 'media#index'
     get 'media/:id', to: 'media#show'
     get 'media/search/:name', to: 'media#search'
     get 'media/search_remote/:name', to: 'media#search_remote'
