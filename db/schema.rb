@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_122819) do
+ActiveRecord::Schema.define(version: 2019_12_24_222336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 2019_12_23_122819) do
     t.string "name", null: false
     t.string "origin_name", null: false
     t.text "desc"
-    t.decimal "rating", precision: 3, scale: 3
-    t.string "type", null: false
+    t.decimal "rating", precision: 18, scale: 3
+    t.string "type"
     t.date "release"
     t.bigint "foreign_id"
     t.text "poster_url"
