@@ -14,7 +14,7 @@ class Media < ApplicationRecord
         t = Media.new
         t.name = f['nameRu']
         t.origin_name = f['nameEn']
-        t.genres = Genre.find_or_create f['genre']
+        t.genres = Genre.find_or_create(f['genre'].map { |g| g['genre'] })
         #f['genre'].each { |g| t.genres << Genre.find_or_create(g['genre']) }
         t.desc = f['description']
         t.rating = f['rating'].to_d
