@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-center">
-  <div class="col-xl-10 col-sm-12">
+  <div class="col-xl-8 col-sm-12">
     <%= form_tag("/", method: :get) do %>
       <%= label_tag(:q, "Search for:") %>
       <%= text_field_tag(:search) %>
@@ -17,9 +17,14 @@
           </div>
           <div class="col-9">
             <div class="card-body">
-              <h5 class="card-title"><%= m.name %></h5>
-              <p class="card-text"><%= m.desc %></p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title"><%= m.name %> (<%= m.release.year %>)</h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= m.origin_name %></h6>
+              <p class="card-text">
+                <b>Жанры:</b> <%= m.genres.to_a.map { |g| g.name }.join(', ') %><br>
+                <b>Рейтинг:</b> <%= m.rating %><br>
+                <b>Описание:</b> <%= m.desc %><br>
+              </p>
+              <a class="btn btn-primary text-white" href=<%= 'https://www.kinopoisk.ru/film/'+ m.foreign_id.to_s %> >Go to Kinopoisk</a>
             </div>
           </div>
         </div>
