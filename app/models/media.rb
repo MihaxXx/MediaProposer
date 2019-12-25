@@ -14,7 +14,8 @@ class Media < ApplicationRecord
         t = Media.new
         t.name = f['nameRu']
         t.origin_name = f['nameEn']
-        f['genre'].each { |g| t.genres << Genre.find_or_create(g['genre']) }
+        t.genres = Genre.find_or_create f['genre']
+        #f['genre'].each { |g| t.genres << Genre.find_or_create(g['genre']) }
         t.desc = f['description']
         t.rating = f['rating'].to_d
         # t.type = 'movie' TODO: inherit
