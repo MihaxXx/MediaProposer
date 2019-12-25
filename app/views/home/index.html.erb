@@ -17,7 +17,7 @@
           </div>
           <div class="col-9">
             <div class="card-body">
-              <h5 class="card-title"><%= m.name %> (<%= m.release.year %>)</h5>
+              <h5 class="card-title"><%= m.name %> (<%= if m.release then m.release.year else 'N/A' end %>)</h5>
               <h6 class="card-subtitle mb-2 text-muted"><%= m.origin_name %></h6>
               <p class="card-text">
                 <b>Жанры:</b> <%= m.genres.to_a.map { |g| g.name }.join(', ') %><br>
