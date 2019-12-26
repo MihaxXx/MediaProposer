@@ -2,31 +2,32 @@ class Media < ApplicationRecord
   validates :name, :origin_name, presence: true
   has_and_belongs_to_many :genres, join_table: :mediagenre
 
-  def self.find_remote(name)
-    candidates = []
-    local = Media.where('LOWER(origin_name) LIKE LOWER(?)', "%#{name}%")
-                 .or(Media.where('LOWER(name) LIKE LOWER(?)', "%#{name}%")).to_a
+  def self.convert_kp_to_media(film)
+    Media.new(
+      name: film['nameRu'],
+      origin_name: film['nameEn'],
+      genres: Genre.find_or_create(film['genre'].map { |g| g['genre'] }),
+      # film['genre'].each { |g| t.genres << Genre.find_or_create(g['genre']) }
+      desc: film['description'],
+      rating: film['rating'].to_d,
+      # type: 'movie', TODO: inherit
+      release: '1.1.' + film['year'],
+      foreign_id: film['filmId'],
+      poster_url: film['posterUrl']
+    )
+  end
 
-    if !local || local.length < 3
+  def self.find_remote(name)
+    candidates = Media.where('LOWER(origin_name) LIKE LOWER(?)', "%#{name}%")
+                      .or(Media.where('LOWER(name) LIKE LOWER(?)', "%#{name}%")).to_a
+
+    if !candidates || candidates.length < 3
       (KinopoiskApi.find name).each do |f|
         next if Media.find_by_foreign_id f['filmId']
 
-        t = Media.new
-        t.name = f['nameRu']
-        t.origin_name = f['nameEn']
-        t.genres = Genre.find_or_create(f['genre'].map { |g| g['genre'] })
-        #f['genre'].each { |g| t.genres << Genre.find_or_create(g['genre']) }
-        t.desc = f['description']
-        t.rating = f['rating'].to_d
-        # t.type = 'movie' TODO: inherit
-        t.release = '1.1.' + f['year']
-        t.foreign_id = f['filmId']
-        t.poster_url = f['posterUrl']
-        candidates << t
+        candidates << (t = convert_kp_to_media(f))
         t.save
       end
-    else
-      candidates |= local
     end
 
     # TODO: Parse other sources
