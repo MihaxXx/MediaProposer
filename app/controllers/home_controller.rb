@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     if params[:search].present?
       @res = Media.find_remote(params[:search])
     else
-      @res = Media.first(5)
+      @res = Media.where('(release IS NOT NULL) AND (rating > 0) AND (rating < 10)').sample(5)
     end
   end
 end
